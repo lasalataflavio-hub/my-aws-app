@@ -19,13 +19,15 @@ def health():
     # Endpoint fondamentale per il Load Balancer
     return "OK", 200
 
+import time
+
 @app.route('/stress')
 def stress():
-    # Un miliardo di cicli invece di 10 milioni
-    count = 0
-    for i in range(10**8): 
-        count += i
-    return "Carico CPU generato pesantemente!"
+    # Facciamo girare la CPU per 60 secondi filati
+    end_time = time.time() + 60  
+    while time.time() < end_time:
+        _ = 1000 * 1000  # Operazione inutile per tenere occupato il core
+    return "CPU stressata per 60 secondi!"
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
