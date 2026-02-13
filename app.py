@@ -21,11 +21,11 @@ def health():
 
 @app.route('/stress')
 def stress():
-    # Semplice ciclo per consumare CPU e testare l'Auto Scaling
+    # Un miliardo di cicli invece di 10 milioni
     count = 0
-    for i in range(10**7):
+    for i in range(10**8): 
         count += i
-    return "Carico CPU generato!"
+    return "Carico CPU generato pesantemente!"
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
